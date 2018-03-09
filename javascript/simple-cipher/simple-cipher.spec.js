@@ -10,20 +10,22 @@ describe('Random key cipher', function () {
   // Here we take advantage of the fact that plaintext of "aaa..."
   // outputs the key. This is a critical problem with shift ciphers, some
   // characters will always output the key verbatim.
-  xit('can encode', function () {
+  it('can encode', function () {
     expect(cipher.encode('aaaaaaaaaa')).toEqual(cipher.key.substr(0, 10));
   });
 
-  xit('can decode', function () {
+  it('can decode', function () {
     expect(cipher.decode(cipher.key.substr(0, 10))).toEqual('aaaaaaaaaa');
   });
 
-  xit('is reversible', function () {
+  it('is reversible', function () {
     var plaintext = 'abcdefghij';
     expect(cipher.decode(cipher.encode(plaintext))).toEqual(plaintext);
   });
 });
 
+
+// ERRORS
 describe('Incorrect key cipher', function () {
   xit('throws an error with an all caps key', function () {
     expect( function () {
@@ -44,19 +46,21 @@ describe('Incorrect key cipher', function () {
   });
 });
 
+
+
 describe('Substitution cipher', function () {
   var key = 'abcdefghij';
   var cipher = new Cipher(key);
 
-  xit('keeps the submitted key', function () {
+  it('keeps the submitted key', function () {
     expect(cipher.key).toEqual(key);
   });
 
-  xit('can encode', function () {
+  it('can encode', function () {
     expect(cipher.encode('aaaaaaaaaa')).toEqual('abcdefghij');
   });
 
-  xit('can decode', function () {
+  it('can decode', function () {
     expect(cipher.decode('abcdefghij')).toEqual('aaaaaaaaaa');
   });
 
@@ -69,11 +73,11 @@ describe('Substitution cipher', function () {
       .toEqual('qayaeaagaciai');
   });
 
-  xit('can wrap on encode', function () {
+  it('can wrap on encode', function () {
     expect(cipher.encode('zzzzzzzzzz')).toEqual('zabcdefghi');
   });
 
-  xit('can wrap on decode', () => {
+  it('can wrap on decode', () => {
     expect(cipher.decode('zabcdefghi')).toEqual('zzzzzzzzzz');
   });
 
